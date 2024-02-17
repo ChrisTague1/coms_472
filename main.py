@@ -102,9 +102,20 @@ def is_solvable(state: List[int]) -> bool:
 
 def bfs(start: List[int], goal_state: List[int]):
     queue = [(start, ['start'])]
+    visited = [start]
+
+    count = 0
 
     while len(queue) > 0:
-        state, path = queue.pop()
+        state, path = queue.pop(0)
+
+        display(state)
+
+        count += 1
+
+        if count > 1000:
+            count = 0
+            print(path)
 
         if state == goal_state:
             return path
@@ -113,10 +124,15 @@ def bfs(start: List[int], goal_state: List[int]):
         states = [action(state) for action in actions]
 
         for value in states:
+            display(value[0])
+            if value[0] in visited:
+                print('already seen')
+                continue
+            else:
+                visited.append(value[0])
             queue.append((value[0], path + [value[1]]))
 
         break
-    print(queue)
 
 
 def main():
@@ -137,7 +153,9 @@ def main():
         7, 8, 0
     ]
 
-    bfs(state, goal_state)
+    path = bfs(state, goal_state)
+
+    print(path)
 
 
 if __name__ == '__main__':
