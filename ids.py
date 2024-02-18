@@ -1,3 +1,6 @@
+import time
+
+
 def get_next_states(state):
     states = []
     i = state.index(0)
@@ -22,13 +25,22 @@ def get_next_states(state):
 
 
 def ids(initial, goal_state):
+    start_time = time.time()
     visited = [initial]
     queue = [(initial, [])]
+    nodes = 0
 
     while len(queue) > 0:
+        nodes += 1
         state, path = queue.pop(-1)
 
         if state == goal_state:
+            end_time = time.time()
+            print(f'Nodes Visited: {nodes}')
+            print(f'Time taken: {end_time - start_time}')
+            print(f'Path Length: {len(path)}')
+            path = ''.join(path)
+            print(f'Path: {path}')
             return
 
         for next_state, next_path in get_next_states(state):
