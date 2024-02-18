@@ -1,6 +1,7 @@
 import sys
 from bfs import bfs
 from display import display
+from ids import ids
 
 
 def parse_file(file_path):
@@ -47,7 +48,7 @@ def main():
     if command == "BFS":
         bfs(state, goal_state)
     elif command == "IDS":
-        print('not implemented yet')
+        ids(state, goal_state)
     elif command == "h1":
         print('not implemented yet')
     elif command == "h2":

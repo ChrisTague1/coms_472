@@ -1,3 +1,4 @@
+from display import display
 from typing import List, Callable
 import time
 
@@ -79,7 +80,7 @@ def bfs(start: List[int], goal_state: List[int]):
     while len(queue) > 0:
         state, path = queue.pop(0)
 
-        # if len(path) == 17:
+        # if len(path) == 8:
         #     display(state)
         #     break
 
