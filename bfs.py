@@ -31,13 +31,18 @@ def bfs(initial, goal_state):
     nodes = 0
 
     while len(queue) > 0:
+        current_time = time.time()
+
+        if current_time - start_time > 15 * 60:
+            print("Timed out: runtime greater than 15 minutes")
+            return
+
         nodes += 1
         state, path = queue.pop(0)
 
         if state == goal_state:
-            end_time = time.time()
             print(f'Nodes Visited: {nodes}')
-            print(f'Time taken: {end_time - start_time}')
+            print(f'Time taken: {current_time - start_time}')
             print(f'Path Length: {len(path)}')
             path = ''.join(path)
             print(f'Path: {path}')

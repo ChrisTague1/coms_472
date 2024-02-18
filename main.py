@@ -48,7 +48,7 @@ def main():
 
     if not is_solvable(state):
         print("Puzzle is not solvable")
-        sys.exit(1)
+        return
 
     goal_state = [
         1, 2, 3,
