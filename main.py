@@ -4,6 +4,7 @@ from display import display
 from ids import ids
 from h1 import h1
 from h2 import h2
+from h3 import h3
 
 
 def parse_file(file_path):
@@ -56,7 +57,7 @@ def main():
     elif command == "h2":
         h2(state, goal_state)
     elif command == "h3":
-        print('not implemented yet')
+        h3(state, goal_state)
     else:
         print("Please provide valid command")
         print("Usage: python main.py <file_path> <BFS|IDS|h1|h2|h3>")
