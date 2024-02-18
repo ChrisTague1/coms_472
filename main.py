@@ -3,6 +3,7 @@ from bfs import bfs
 from display import display
 from ids import ids
 from h1 import h1
+from h2 import h2
 
 
 def parse_file(file_path):
@@ -53,7 +54,7 @@ def main():
     elif command == "h1":
         h1(state, goal_state)
     elif command == "h2":
-        print('not implemented yet')
+        h2(state, goal_state)
     elif command == "h3":
         print('not implemented yet')
     else:
