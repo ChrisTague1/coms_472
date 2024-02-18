@@ -1,5 +1,6 @@
 from typing import List, Callable
 import sys
+import time
 
 
 def display(state: List[int]):
@@ -23,7 +24,7 @@ def up(state: List[int]):
     copy = state[:]
     copy[index] = copy[other]
     copy[other] = 0
-    return (copy, 'up')
+    return (copy, "U")
 
 
 def check_down(state: List[int]) -> bool:
@@ -37,7 +38,7 @@ def down(state: List[int]):
     copy = state[:]
     copy[index] = copy[other]
     copy[other] = 0
-    return (copy, 'down')
+    return (copy, "D")
 
 
 def check_left(state: List[int]) -> bool:
@@ -51,7 +52,7 @@ def left(state: List[int]):
     copy = state[:]
     copy[index] = copy[other]
     copy[other] = 0
-    return (copy, 'left')
+    return (copy, "L")
 
 
 def check_right(state: List[int]) -> bool:
@@ -65,7 +66,7 @@ def right(state: List[int]):
     copy = state[:]
     copy[index] = copy[other]
     copy[other] = 0
-    return (copy, 'right')
+    return (copy, "R")
 
 
 CheckFunc = Callable[[List[int]], bool]
@@ -101,38 +102,38 @@ def is_solvable(state: List[int]) -> bool:
 
 
 def bfs(start: List[int], goal_state: List[int]):
-    queue = [(start, ['start'])]
+    start_time = time.time()
+    queue = [(start, [])]
     visited = [start]
 
-    count = 0
+    nodes = 1
 
     while len(queue) > 0:
         state, path = queue.pop(0)
 
-        display(state)
-
-        count += 1
-
-        if count > 1000:
-            count = 0
-            print(path)
+        # if len(path) == 17:
+        #     display(state)
+        #     break
 
         if state == goal_state:
-            return path
+            end_time = time.time()
+            print(f'Nodes Visited: {nodes}')
+            print(f'Time taken: {end_time - start_time}')
+            print(f'Path Length: {len(path)}')
+            path = ''.join(path)
+            print(f'Path: {path}')
+            return
 
         actions = get_available_actions(state)
         states = [action(state) for action in actions]
 
         for value in states:
-            display(value[0])
+            nodes += 1
             if value[0] in visited:
-                print('already seen')
                 continue
             else:
                 visited.append(value[0])
             queue.append((value[0], path + [value[1]]))
-
-        break
 
 
 def main():
@@ -153,9 +154,7 @@ def main():
         7, 8, 0
     ]
 
-    path = bfs(state, goal_state)
-
-    print(path)
+    bfs(state, goal_state)
 
 
 if __name__ == '__main__':
