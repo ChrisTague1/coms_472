@@ -1,83 +1,6 @@
-from typing import List, Callable
 import sys
-import time
-
-
-def display(state: List[int]):
-    for i in range(3):
-        for j in range(3):
-            item = state[i * 3 + j]
-            item = item if item != 0 else '_'
-            print(item, end=' ')
-        print()
-    print()
-
-
-def check_up(state: List[int]) -> bool:
-    index = state.index(0)
-    return index <= 5
-
-
-def up(state: List[int]):
-    index = state.index(0)
-    other = index + 3
-    copy = state[:]
-    copy[index] = copy[other]
-    copy[other] = 0
-    return (copy, "U")
-
-
-def check_down(state: List[int]) -> bool:
-    index = state.index(0)
-    return index >= 3
-
-
-def down(state: List[int]):
-    index = state.index(0)
-    other = index - 3
-    copy = state[:]
-    copy[index] = copy[other]
-    copy[other] = 0
-    return (copy, "D")
-
-
-def check_left(state: List[int]) -> bool:
-    index = state.index(0)
-    return index % 3 != 2
-
-
-def left(state: List[int]):
-    index = state.index(0)
-    other = index + 1
-    copy = state[:]
-    copy[index] = copy[other]
-    copy[other] = 0
-    return (copy, "L")
-
-
-def check_right(state: List[int]) -> bool:
-    index = state.index(0)
-    return index % 3 != 0
-
-
-def right(state: List[int]):
-    index = state.index(0)
-    other = index - 1
-    copy = state[:]
-    copy[index] = copy[other]
-    copy[other] = 0
-    return (copy, "R")
-
-
-CheckFunc = Callable[[List[int]], bool]
-MoveFunc = Callable[[List[int]], List[int]]
-
-
-def get_available_actions(state: List[int]) -> List[MoveFunc]:
-    checks: List[CheckFunc] = [check_up, check_down, check_left, check_right]
-    moves: List[MoveFunc] = [up, down, left, right]
-
-    return [moves[index] for index, check in enumerate(checks) if check(state)]
+from bfs import bfs
+from display import display
 
 
 def parse_file(file_path):
@@ -90,7 +13,7 @@ def parse_file(file_path):
     return puzzle
 
 
-def is_solvable(state: List[int]) -> bool:
+def is_solvable(state):
     inversions = 0
     for i, n in enumerate(state):
         for j in range(i + 1, 9):
@@ -101,44 +24,9 @@ def is_solvable(state: List[int]) -> bool:
     return inversions % 2 == 0
 
 
-def bfs(start: List[int], goal_state: List[int]):
-    start_time = time.time()
-    queue = [(start, [])]
-    visited = [start]
-
-    nodes = 1
-
-    while len(queue) > 0:
-        state, path = queue.pop(0)
-
-        # if len(path) == 17:
-        #     display(state)
-        #     break
-
-        if state == goal_state:
-            end_time = time.time()
-            print(f'Nodes Visited: {nodes}')
-            print(f'Time taken: {end_time - start_time}')
-            print(f'Path Length: {len(path)}')
-            path = ''.join(path)
-            print(f'Path: {path}')
-            return
-
-        actions = get_available_actions(state)
-        states = [action(state) for action in actions]
-
-        for value in states:
-            nodes += 1
-            if value[0] in visited:
-                continue
-            else:
-                visited.append(value[0])
-            queue.append((value[0], path + [value[1]]))
-
-
 def main():
-    if len(sys.argv) != 2:
-        print("Usage: python main.py <file_path>")
+    if len(sys.argv) != 3:
+        print("Usage: python main.py <file_path> <BFS|IDS|h1|h2|h3>")
         sys.exit(1)
 
     state = parse_file(sys.argv[1])
@@ -154,7 +42,21 @@ def main():
         7, 8, 0
     ]
 
-    bfs(state, goal_state)
+    command = sys.argv[2]
+
+    if command == "BFS":
+        bfs(state, goal_state)
+    elif command == "IDS":
+        print('not implemented yet')
+    elif command == "h1":
+        print('not implemented yet')
+    elif command == "h2":
+        print('not implemented yet')
+    elif command == "h3":
+        print('not implemented yet')
+    else:
+        print("Please provide valid command")
+        print("Usage: python main.py <file_path> <BFS|IDS|h1|h2|h3>")
 
 
 if __name__ == '__main__':
