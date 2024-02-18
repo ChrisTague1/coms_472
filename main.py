@@ -1,10 +1,19 @@
 import sys
 from bfs import bfs
-from display import display
 from ids import ids
 from h1 import h1
 from h2 import h2
 from h3 import h3
+
+
+def display(state):
+    for i in range(3):
+        for j in range(3):
+            item = state[i * 3 + j]
+            item = item if item != 0 else '_'
+            print(item, end=' ')
+        print()
+    print()
 
 
 def parse_file(file_path):
@@ -35,8 +44,9 @@ def main():
 
     state = parse_file(sys.argv[1])
 
+    display(state)
+
     if not is_solvable(state):
-        display(state)
         print("Puzzle is not solvable")
         sys.exit(1)
 
