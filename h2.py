@@ -2,8 +2,8 @@ import time
 from queue import PriorityQueue
 
 
-def heuristic(state, goal_state):
-    count = 0
+def heuristic(state, goal_state, cost):
+    count = cost
     for i, n in enumerate(state):
         i2 = goal_state.index(n)
         x1, y1 = i % 3, i // 3
@@ -64,6 +64,6 @@ def h2(initial, goal_state):
             if next_state not in visited:
                 visited.append(next_state)
                 queue.put((
-                    heuristic(next_state, goal_state),
+                    heuristic(next_state, goal_state, len(path)),
                     (next_state, path + [next_path])
                 ))

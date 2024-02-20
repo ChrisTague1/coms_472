@@ -26,29 +26,35 @@ def get_next_states(state):
 
 def ids(initial, goal_state):
     start_time = time.time()
-    visited = [initial]
-    queue = [(initial, [])]
+    depth = 0
     nodes = 0
 
-    while len(queue) > 0:
-        current_time = time.time()
+    while True:
+        visited = [initial]
+        queue = [(initial, [])]
 
-        if current_time - start_time > 15 * 60:
-            print("Timed out: runtime greater than 15 minutes")
-            return
+        while len(queue) > 0:
+            current_time = time.time()
 
-        nodes += 1
-        state, path = queue.pop(-1)
+            if current_time - start_time > 15 * 60:
+                print("Timed out: runtime greater than 15 minutes")
+                return
 
-        if state == goal_state:
-            print(f'Nodes Visited: {nodes}')
-            print(f'Time taken: {current_time - start_time}')
-            print(f'Path Length: {len(path)}')
-            path = ''.join(path)
-            print(f'Path: {path}')
-            return
+            nodes += 1
+            state, path = queue.pop(-1)
 
-        for next_state, next_path in get_next_states(state):
-            if next_state not in visited:
-                visited.append(next_state)
-                queue.append((next_state, path + [next_path]))
+            if state == goal_state:
+                print(f'Nodes Visited: {nodes}')
+                print(f'Time taken: {current_time - start_time}')
+                print(f'Path Length: {len(path)}')
+                path = ''.join(path)
+                print(f'Path: {path}')
+                return
+
+            for next_state, next_path in get_next_states(state):
+                if len(path) + len(next_path) > depth:
+                    continue
+                if next_state not in visited:
+                    visited.append(next_state)
+                    queue.append((next_state, path + [next_path]))
+        depth += 1
