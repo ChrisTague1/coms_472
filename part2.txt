@@ -4,7 +4,7 @@ Time taken: 516.6373965740204
 Path Length: 24
 Path: DDLUULDRRULLDRRDLLURRULL
 
-BFS: Part2/S1.txt
+BFS: Part2/S2.txt
 Puzzle is not solvable
 
 BFS: Part2/S3.txt
@@ -16,8 +16,116 @@ Path: DDLLURULDRRDLLURRULL
 BFS: Part2/S4.txt
 Timed out: runtime greater than 15 minutes
 
-BFS: Part2/S3.txt
+BFS: Part2/S5.txt
 Nodes Visited: 123
 Time taken: 0.0006368160247802734
+Path Length: 6
+Path: RDLUUL
+
+IDS: Part2/S1.txt
+Nodes Visited: 678820
+Time taken: 568.2699456214905
+Path Length: 36
+Path: LLDRRDLLURRULLDRRULDRDLURDLLURRDLULU
+
+IDS: Part2/S2.txt
+Nodes Visited: 162372
+Time taken: 50.235777616500854
+Path Length: 26
+Path: DLDLURRDLUULDRRULDDLUURDLU
+
+IDS: Part2/S3.txt
+Puzzle is not solvable
+
+IDS: Part2/S4.txt
+Nodes Visited: 531513
+Time taken: 341.68628120422363
+Path Length: 35
+Path: LDDRURDLURULDRULLDDRRUULLDRRULDDLUU
+
+IDS: Part2/S5.txt
+Nodes Visited: 164
+Time taken: 0.00040411949157714844
+Path Length: 6
+Path: RDLUUL
+
+h1: Part2/S1.txt
+Nodes Visited: 13053
+Time taken: 4.24057149887085
+Path Length: 24
+Path: DDLUULDRRULLDRRDLLURRULL
+
+h1: Part2/S2.txt
+Nodes Visited: 1963
+Time taken: 0.11405158042907715
+Path Length: 20
+Path: DDLLURULDRRDLLURRULL
+
+h1: Part2/S3.txt
+Puzzle is not solvable
+
+h1: Part2/S4.txt
+Nodes Visited: 125914
+Time taken: 765.1760203838348
+Path Length: 31
+Path: LDDRRUULLDRRULLDRDLURDRUULLDRUL
+
+h1: Part2/S5.txt
+Nodes Visited: 10
+Time taken: 9.489059448242188e-05
+Path Length: 6
+Path: RDLUUL
+
+h2: Part2/S1.txt
+Nodes Visited: 4096
+Time taken: 0.5364153385162354
+Path Length: 24
+Path: DDLUULDRRULLDRRDLLURRULL
+
+h2: Part2/S2.txt
+Nodes Visited: 469
+Time taken: 0.013648509979248047
+Path Length: 20
+Path: DDLLURULDRRDLLURRULL
+
+h2: Part2/S3.txt
+Puzzle is not solvable
+
+h2: Part2/S4.txt
+Nodes Visited: 34841
+Time taken: 40.06285548210144
+Path Length: 31
+Path: LDDRRUULLDRRULLDRDLURDRUULLDRUL
+
+h2: Part2/S5.txt
+Nodes Visited: 11
+Time taken: 0.00021266937255859375
+Path Length: 6
+Path: RDLUUL
+
+h3: Part2/S1.txt
+Nodes Visited: 8285
+Time taken: 2.2567670345306396
+Path Length: 26
+Path: DLLDRRULLDRUULDRURDLULDRUL
+
+h3: Part2/S2.txt
+Nodes Visited: 53565
+Time taken: 107.42733979225159
+Path Length: 32
+Path: LLDRDRUULDDLURRDLULURDLDRUULDRUL
+
+h3: Part2/S3.txt
+Puzzle is not solvable
+
+h3: Part2/S4.txt
+Nodes Visited: 68372
+Time taken: 184.22083282470703
+Path Length: 33
+Path: LDRDRULURDLULDRDLURDRUULDRULLDRUL
+
+h3: Part2/S5.txt
+Nodes Visited: 14
+Time taken: 0.00035858154296875
 Path Length: 6
 Path: RDLUUL
