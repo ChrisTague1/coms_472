@@ -44,7 +44,8 @@ def main():
 
     state = parse_file(sys.argv[1])
 
-    display(state)
+    print()
+    print(f'{sys.argv[2]}: {sys.argv[1]}')
 
     if not is_solvable(state):
         print("Puzzle is not solvable")

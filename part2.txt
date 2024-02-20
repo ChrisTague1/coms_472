@@ -1,0 +1,23 @@
+BFS: Part2/S1.txt
+Nodes Visited: 117096
+Time taken: 516.6373965740204
+Path Length: 24
+Path: DDLUULDRRULLDRRDLLURRULL
+
+BFS: Part2/S1.txt
+Puzzle is not solvable
+
+BFS: Part2/S3.txt
+Nodes Visited: 41088
+Time taken: 76.74776935577393
+Path Length: 20
+Path: DDLLURULDRRDLLURRULL
+
+BFS: Part2/S4.txt
+Timed out: runtime greater than 15 minutes
+
+BFS: Part2/S3.txt
+Nodes Visited: 123
+Time taken: 0.0006368160247802734
+Path Length: 6
+Path: RDLUUL
