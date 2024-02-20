@@ -2,8 +2,8 @@ import json
 import os
 import subprocess
 
-alg = 'h2'
-directory = 'Part3/L8/'
+alg = 'h3'
+directory = 'Part3/L24/'
 
 times = []
 nodes = []
