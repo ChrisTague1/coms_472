@@ -47,7 +47,7 @@ def bfs(initial, goal_state):
             # print(f'Path Length: {len(path)}')
             # path = ''.join(path)
             # print(f'Path: {path}')
-            return
+            return f'{{"time": {current_time - start_time}, "nodes": {nodes}}}'
 
         for next_state, next_path in get_next_states(state):
             if next_state not in visited:
