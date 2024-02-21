@@ -2,7 +2,7 @@ import json
 import os
 import subprocess
 
-alg = 'h3'
+alg = 'IDS'
 directory = 'Part3/L24/'
 
 times = []
@@ -21,6 +21,10 @@ for filename in os.listdir(directory):
 
 avg_time = sum(times) / len(times) if times else 0
 avg_nodes = sum(nodes) / len(nodes) if nodes else 0
+
+with open('the_output.txt', 'a') as file:
+    file.write(f"Average Time: {avg_time}")
+    file.write(f"Average Nodes: {avg_nodes}")
 
 print("Average Time:", avg_time)
 print("Average Nodes:", avg_nodes)

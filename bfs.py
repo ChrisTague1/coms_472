@@ -41,6 +41,9 @@ def bfs(initial, goal_state):
         state, path = queue.pop(0)
 
         if state == goal_state:
+            output = f'{{"time": {current_time - start_time}, "nodes": {nodes}}}'
+            with open('bfs_output.txt', 'a') as file:
+                file.write(output)
             print(f'{{"time": {current_time - start_time}, "nodes": {nodes}}}')
             # print(f'Nodes Visited: {nodes}')
             # print(f'Time taken: {current_time - start_time}')

@@ -44,6 +44,9 @@ def ids(initial, goal_state):
             state, path = queue.pop(-1)
 
             if state == goal_state:
+                the_result = f'{{"time": {current_time - start_time}, "nodes": {nodes}}}' 
+                with open('ids_output.txt', 'a') as file:
+                    file.write(the_result)
                 print(f'{{"time": {current_time - start_time}, "nodes": {nodes}}}')
                 # print(f'Nodes Visited: {nodes}')
                 # print(f'Time taken: {current_time - start_time}')

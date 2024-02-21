@@ -1,0 +1,1 @@
+Average Time: 545.8555407643319Average Nodes: 128030.95
