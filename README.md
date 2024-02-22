@@ -20,3 +20,6 @@ python main.py Part2/some_sample.txt BFS
 - `h3.py` has h3 implementation
 - `part2.txt` has the runs required for part 2 of the lab
 - `coms472_lab1_part3.pdf` has the table for part 3 of the lab
+
+## Heuristic 3
+For the third heuristic, I came up with calculating the neighbors that are incorrect. It doesn't care about placement of these neighbors, just that the four surounding it are the ones that should be or shouldn't be
