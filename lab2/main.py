@@ -1,17 +1,26 @@
 import sys
+import copy
 
 BOARD_SIZE = 5 # 15
-CENTER = BOARD_SIZE // 2 + 1
+CENTER = BOARD_SIZE // 2
 WINNING_LENGTH = 3 # 5
 MOVE_THREE_DISTANCE = 1 # 3
 DEPTH_LIMIT = 5
 
-def display(state):
-    for x in range(BOARD_SIZE):
-        for y in range(BOARD_SIZE):
-            print(state[x][y], end="")
-        print()
-
+def display(matrix):
+    size = len(matrix)
+    
+    print("+" + "--+" * size)
+    
+    for i in range(size):
+        if i > 0:
+            print("+" + "--+" * size)
+        
+        for j in range(size):
+            print("| " + matrix[i][j], end="")
+        print("|")
+    
+    print("+" + "--+" * size)
 
 def get_moves(state):
     turn = 1
@@ -75,21 +84,21 @@ def alpha_beta(board, depth, alpha, beta, first_player, eval_func):
         max_eval = -sys.maxsize
         best_move = None
         for move in get_moves(board):
-            new_board = board.copy()
+            new_board = copy.deepcopy(board)
             new_board[move[0]][move[1]] = 'X'
             eval, _ = alpha_beta(new_board, depth - 1, alpha, beta, False, eval_func)
             if eval > max_eval:
                 max_eval = eval
                 best_move = move
             alpha = max(alpha, eval)
-            if beta <= alpha:
+            if beta <= alpha: # book has this if statement, not fully sure what it does
                 break
         return max_eval, best_move
     else:
         min_eval = sys.maxsize
         best_move = None
         for move in get_moves(board):
-            new_board = board.copy()
+            new_board = copy.deepcopy(board)
             new_board[move[0]][move[1]] = 'O'
             eval, _ = alpha_beta(new_board, depth - 1, alpha, beta, True, eval_func)
             if eval < min_eval:
@@ -106,18 +115,23 @@ def get_best_move(board, eval_func):
     
 
 def main():
-    # first_player = input("Would you like to be player 1? T/F: ") == "T"
-    # move = input("Enter the coordinates of your first move, space separated (ex. 4 9): ")
-    # move = tuple(map(lambda x: int(x), move.strip(" ").split(" ")))
-    # print(move)
-    initial_state = [[" " for _ in range(BOARD_SIZE)] for _ in range(BOARD_SIZE)]
-    initial_state[3][3] = 'X'
-    initial_state[2][4] = 'O'
-    initial_state[3][4] = 'X'
-    initial_state[3][2] = 'O'
-    display(initial_state)
-    move = get_best_move(initial_state, evaluation_function)
-    print(move)
+    print("Enter moves as y x. Example: 3 3")
+
+    state = [[" " for _ in range(BOARD_SIZE)] for _ in range(BOARD_SIZE)]
+    ai_turn = True
+    while longest_stream(state, 'X') < WINNING_LENGTH and longest_stream(state, 'O') < WINNING_LENGTH:
+        if ai_turn:
+            move = get_best_move(state, evaluation_function)
+            state[move[0]][move[1]] = 'X'
+        else:
+            display(state)
+            move = tuple(map(lambda x: int(x), input("Move: ").strip(" ").split(" ")))
+            state[move[0]][move[1]] = 'O'
+        ai_turn = not ai_turn
+    if longest_stream(state, 'X') >= WINNING_LENGTH:
+        print("Player X won!")
+    else:
+        print("Player O won!")
 
 
 if __name__ == "__main__":
