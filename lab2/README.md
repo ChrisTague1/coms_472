@@ -1,3 +1,31 @@
-> At any state, you can put your stone on any one of the empty cells on the board. So the number of valid actions should be equal to number of empty cells at that state. Each action will generate a successor state. Initially the board is empty, so you will have 15X15 actions, and hence 15X15 valid successor states. Each of those states will once again have 15X15-1 successor states.
-> And every time you choose an action, depth increases by 1. Once you reach max depth, you will need to evaluate all the states at that depth (The number will be very large).
-> I would recommend trying out the algorithm on a tic-tac-toe board first. It follows the same logic.
+# Lab 2
+
+To run, execute the following:
+
+```bash
+python main.py
+```
+
+> May have to use `python3`, or install python if it is not on your system
+
+Accepts the following arguments
+- `--size=`
+    - Size of the board
+- `--depth=`
+    - Depth limit of the alpha-beta algorithm
+- `--winning-length=`
+    - The number of squares in a row to win
+- `--move-three-distance=`
+    - The distance the first players second move must be placed away from their first
+- `--eval-func=`
+    - Which evaluation function to use. 1 for evaluation function 1, any other int for 2
+
+Note there is not error handling on these. If `--move-three-distance=100` and `--size=2`, the program will not work
+
+Example of using all the arguments:
+
+```bash
+python main.py --size=9 --depth=3 --winning-length=3 --move-three-distance=3 --eval-func=2
+```
+
+> Note: they can appear in any order
