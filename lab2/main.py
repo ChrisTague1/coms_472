@@ -1,5 +1,6 @@
 import sys
 import copy
+import random
 
 BOARD_SIZE = 15 # 15
 CENTER = BOARD_SIZE // 2
@@ -43,8 +44,9 @@ def get_moves(state):
         return [(CENTER, CENTER)]
     
     if turn == 3:
-        return list(filter(lambda x: abs(x[0] - CENTER) + (x[1] - CENTER) >= MOVE_THREE_DISTANCE, moves))
+        moves = list(filter(lambda x: abs(x[0] - CENTER) + (x[1] - CENTER) >= MOVE_THREE_DISTANCE, moves))
 
+    random.shuffle(moves)
     return moves
 
 
@@ -125,11 +127,11 @@ def evaluation_function1(board):
     x_max = max(x_streams)
     o_max = max(o_streams)
 
-    if x_max + 1 == WINNING_LENGTH:
-        x_max *= 10
+    if x_max + 1 >= WINNING_LENGTH:
+        x_max *= 100
 
-    if o_max + 1 == WINNING_LENGTH:
-        o_max *= 10
+    if o_max + 1 >= WINNING_LENGTH:
+        o_max *= 100
 
     x_streams = list(map(lambda x: x ** 2, x_streams))
     o_streams = list(map(lambda o: o ** 2, o_streams))
@@ -228,7 +230,7 @@ def main():
     eval_func = evaluation_function1
 
     if EVAL_FUNC != 1:
-        eval_func = evaluation_function
+        eval_func = evaluation_function2
 
     state = [[" " for _ in range(BOARD_SIZE)] for _ in range(BOARD_SIZE)]
     ai_turn = True
