@@ -85,7 +85,7 @@ def evaluation_function2(board):
 def evaluation_function1(board):
     def get_streams(search, not_search):
         directions = [(1, 0), (0, 1), (1, 1), (1, -1)]
-        streams = []
+        streams = [0]
 
         for i in range(BOARD_SIZE):
             for j in range(BOARD_SIZE):
@@ -217,6 +217,13 @@ def override_globals():
             except ValueError:
                 print("Invalide value for --eval-func. Using default value.")
 
+def game_is_draw(board):
+    for i in range(BOARD_SIZE):
+        for j in range(BOARD_SIZE):
+            if board[i][j] == " ":
+                return False
+    return True
+
 def main():
     override_globals()
     print(f"BOARD_SIZE={BOARD_SIZE} --size={BOARD_SIZE}")
@@ -235,6 +242,11 @@ def main():
     state = [[" " for _ in range(BOARD_SIZE)] for _ in range(BOARD_SIZE)]
     ai_turn = True
     while longest_stream(state, 'X') < WINNING_LENGTH and longest_stream(state, 'O') < WINNING_LENGTH:
+        if game_is_draw(state):
+            display(state)
+            print("Draw. Good game!")
+            return
+
         if ai_turn:
             move = get_best_move(state, eval_func)
             state[move[0]][move[1]] = 'X'
