@@ -69,8 +69,7 @@ def longest_stream(board, search):
 
     return max_stream
 
-# another similar one might involve squaring the the longest
-def evaluation_function1(board):
+def evaluation_function2(board):
     longest_x = longest_stream(board, "X")
     longest_o = longest_stream(board, "O")
 
@@ -81,8 +80,70 @@ def evaluation_function1(board):
 
     return longest_x - longest_o
 
-def evaluation_function2(board):
-    return -evaluation_function1(board)
+def evaluation_function1(board):
+    def get_streams(search, not_search):
+        directions = [(1, 0), (0, 1), (1, 1), (1, -1)]
+        streams = []
+
+        for i in range(BOARD_SIZE):
+            for j in range(BOARD_SIZE):
+                if board[i][j] == search:
+                    for dir_row, dir_col in directions:
+                        if 0 <= i - dir_row < BOARD_SIZE and 0 <= j - dir_col < BOARD_SIZE and board[i - dir_row][j - dir_col] == search:
+                            continue
+                        stream_length = 0
+                        row = i
+                        col = j
+                        while 0 <= row < BOARD_SIZE and 0 <= col < BOARD_SIZE and board[row][col] == search:
+                            stream_length += 1
+                            row += dir_row
+                            col += dir_col
+                        row_cont = row
+                        col_cont = col
+                        current_length = stream_length
+                        while 0 <= row_cont < BOARD_SIZE and 0 <= col_cont < BOARD_SIZE and board[row_cont][col_cont] != not_search and current_length < WINNING_LENGTH:
+                            row_cont += dir_row
+                            col_cont += dir_col
+                            current_length += 1
+                        if current_length >= WINNING_LENGTH:
+                            streams.append(stream_length)
+                        row_cont = i - dir_row
+                        col_cont = j - dir_col
+                        current_length = stream_length
+                        while 0 <= row_cont < BOARD_SIZE and 0 <= col_cont < BOARD_SIZE and board[row_cont][col_cont] != not_search and current_length < WINNING_LENGTH:
+                            row_cont -= dir_row
+                            col_cont -= dir_col
+                            current_length += 1
+                        if current_length >= WINNING_LENGTH:
+                            streams.append(stream_length)
+        
+        return streams
+
+    x_streams = get_streams("X", "O")
+    o_streams = get_streams("O", "X")
+
+    x_max = max(x_streams)
+    o_max = max(o_streams)
+
+    if x_max + 1 == WINNING_LENGTH:
+        x_max *= 10
+
+    if o_max + 1 == WINNING_LENGTH:
+        o_max *= 10
+
+    x_streams = list(map(lambda x: x ** 2, x_streams))
+    o_streams = list(map(lambda o: o ** 2, o_streams))
+
+    x_max = x_max ** 2
+    o_max = o_max ** 2
+
+    x_sum = sum(x_streams)
+    o_sum = sum(o_streams)
+    
+    x_rating = 10 * x_max + x_sum
+    o_rating = 10 * o_max + o_sum
+
+    return x_rating - o_rating
 
 
 def alpha_beta(board, depth, alpha, beta, first_player, eval_func):
